@@ -1,0 +1,53 @@
+/*
+ * style.css — presentation only. All game sizing of the canvas backing store is
+ * done in src/main.js (resolveCanvas sets width/height from config.playArea and
+ * devicePixelRatio). Here we only control how the fixed 480x640 logical canvas is
+ * displayed: centered in the viewport and scaled to fit while preserving aspect
+ * ratio, in both portrait and landscape. Buildless — no preprocessor.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  /* Dark page background so the fit-scaled canvas sits in letterbox/pillarbox space. */
+  background: #10131a;
+  /* Center the canvas both axes. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+canvas#game {
+  display: block;
+
+  /* Preserve the fixed logical aspect ratio (480 x 640, portrait). */
+  aspect-ratio: 480 / 640;
+
+  /*
+   * Scale to fit the viewport while keeping the aspect ratio:
+   * - Never exceed the viewport in either dimension.
+   * - Height-driven in portrait, width-driven in landscape; aspect-ratio keeps
+   *   the other dimension in proportion. This works for both orientations.
+   */
+  height: auto;
+  width: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+
+  /* Retro, crisp pixel look when the canvas is up/down-scaled. */
+  image-rendering: pixelated;
+
+  /* Prevent touch taps from scrolling/zooming so flap input is clean on mobile. */
+  touch-action: none;
+}

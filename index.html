@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Flappy Kiro</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--
+      The game canvas. Its id is "game" so src/main.js (CANVAS_ID = 'game')
+      resolves it first. main.js sizes the backing store from config.playArea
+      (480x640) and applies devicePixelRatio, so we intentionally do NOT set
+      width/height attributes here — style.css only controls the display size.
+    -->
+    <canvas id="game"></canvas>
+
+    <!-- Buildless ESM entry point: opening this file runs the game, no bundler. -->
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
